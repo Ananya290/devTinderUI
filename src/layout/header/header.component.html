@@ -1,0 +1,83 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 shadow-sm">
+  <div class="container-fluid">
+
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" routerLink="/">
+      <i class="fas fa-heart text-danger me-2"></i>
+      devTinder
+    </a>
+
+    <!-- Toggle -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+
+      <!-- Left Links -->
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">
+            <i class="fas fa-home me-1"></i> Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/matches">
+            <i class="fas fa-fire me-1"></i> Matches
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/messages">
+            <i class="fas fa-comments me-1"></i> Messages
+          </a>
+        </li>
+      </ul>
+
+      <!-- Right Section -->
+      <div class="d-flex align-items-center gap-3">
+
+        <!-- Notification -->
+        <button class="btn btn-outline-light btn-sm">
+          <i class="fas fa-bell"></i>
+        </button>
+
+        <!-- PROFILE MENU (IMPORTANT PART) -->
+        <div class="d-flex align-items-center">
+          <button
+            mat-button
+            class="text-white fw-semibold"
+            [matMenuTriggerFor]="profileMenu"
+          >
+            <i class="fas fa-user-circle me-1"></i>
+            {{ userName }}
+          </button>
+        </div>
+
+        <!-- Menu -->
+        <mat-menu
+          #profileMenu="matMenu"
+          yPosition="below"
+          xPosition="after"
+          overlapTrigger="false"
+        >
+          <button mat-menu-item routerLink="/profile">
+            <i class="fas fa-user me-2"></i> Profile
+          </button>
+          <button mat-menu-item routerLink="/settings">
+            <i class="fas fa-cog me-2"></i> Settings
+          </button>
+          <button mat-menu-item (click)="logout()">
+            <i class="fas fa-sign-out-alt me-2"></i> Logout
+          </button>
+        </mat-menu>
+
+      </div>
+    </div>
+  </div>
+</nav>
