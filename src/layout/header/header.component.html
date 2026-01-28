@@ -1,83 +1,70 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 shadow-sm">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+ 
+  <a class="navbar-brand d-flex align-items-center" href="#">
+    <i class="fa-solid fa-bug text-danger me-2"></i>
+    <span class="fw-bold">devTinder</span>
+  </a>
 
-    <!-- Logo -->
-    <a class="navbar-brand fw-bold d-flex align-items-center" routerLink="/">
-      <i class="fas fa-heart text-danger me-2"></i>
-      devTinder
-    </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarContent"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <!-- Toggle -->
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarContent"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav me-auto ms-4 mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link active" routerLink="home">
+          <i class="fa-solid fa-house me-1"></i> Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="auth">
+          <i class="fa-solid fa-fire me-1"></i> Matches
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="messages">
+          <i class="fa-solid fa-comment-dots me-1"></i> Messages
+        </a>
+      </li>
+    </ul>
 
-    <!-- Navbar -->
-    <div class="collapse navbar-collapse" id="navbarContent">
+    <ul class="navbar-nav ms-auto align-items-center">
+      <li class="nav-item me-3">
+        <a class="nav-link" href="#">
+          <i class="fa-solid fa-bell"></i>
+        </a>
+      </li>
 
-      <!-- Left Links -->
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/home">
-            <i class="fas fa-home me-1"></i> Home
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/matches">
-            <i class="fas fa-fire me-1"></i> Matches
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/messages">
-            <i class="fas fa-comments me-1"></i> Messages
-          </a>
-        </li>
-      </ul>
-
-      <!-- Right Section -->
-      <div class="d-flex align-items-center gap-3">
-
-        <!-- Notification -->
-        <button class="btn btn-outline-light btn-sm">
-          <i class="fas fa-bell"></i>
-        </button>
-
-        <!-- PROFILE MENU (IMPORTANT PART) -->
-        <div class="d-flex align-items-center">
-          <button
-            mat-button
-            class="text-white fw-semibold"
-            [matMenuTriggerFor]="profileMenu"
-          >
-            <i class="fas fa-user-circle me-1"></i>
-            {{ userName }}
-          </button>
-        </div>
-
-        <!-- Menu -->
-        <mat-menu
-          #profileMenu="matMenu"
-          yPosition="below"
-          xPosition="after"
-          overlapTrigger="false"
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle d-flex align-items-center"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
         >
-          <button mat-menu-item routerLink="/profile">
-            <i class="fas fa-user me-2"></i> Profile
-          </button>
-          <button mat-menu-item routerLink="/settings">
-            <i class="fas fa-cog me-2"></i> Settings
-          </button>
-          <button mat-menu-item (click)="logout()">
-            <i class="fas fa-sign-out-alt me-2"></i> Logout
-          </button>
-        </mat-menu>
+          <i class="fa-solid fa-user-circle fs-4 me-2"></i>
+          <span>Ananya</span>
+        </a>
 
-      </div>
-    </div>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li>
+            <a class="dropdown-item" routerLink="profile">
+              <i class="fa-solid fa-user me-2"></i> Profile
+            </a>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item text-danger" href="#">
+              <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </nav>

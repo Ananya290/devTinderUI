@@ -1,15 +1,11 @@
 .navbar {
-  height: 64px;
+  height: 60px;
 }
 
 .nav-link {
   font-weight: 500;
 }
 
-.nav-link:hover {
-  color: #ff4d6d !important;
-}
-
-::ng-deep .cdk-overlay-pane {
-  margin-top: 6px;
+.dropdown-menu {
+  min-width: 180px;
 }
