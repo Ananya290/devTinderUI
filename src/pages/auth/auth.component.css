@@ -1,0 +1,36 @@
+/* Full black background */
+.login-wrapper {
+  min-height: 100vh;
+  background-color: #000;
+}
+
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background-color: #111;
+  border-radius: 12px;
+}
+
+
+.form-control::placeholder {
+  color: #aaa;
+}
+
+.form-control:focus {
+  background-color: #111;
+  color: #fff;
+  border-color: #dc3545;
+  box-shadow: none;
+}
+
+
+.btn-danger {
+  padding: 10px;
+  border-radius: 8px;
+}
+
+
+.alert {
+  font-size: 14px;
+}
