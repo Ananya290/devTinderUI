@@ -47,8 +47,8 @@
           role="button"
           data-bs-toggle="dropdown"
         >
-          <i class="fa-solid fa-user-circle fs-4 me-2"></i>
-          <span>Ananya</span>
+          <i class="fa-solid fa-user-circle fs-4 me-2"></i>          
+          <span>{{ (user$ | async)?.firstName }}</span>
         </a>
 
         <ul class="dropdown-menu dropdown-menu-end">

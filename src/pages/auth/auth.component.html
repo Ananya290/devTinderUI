@@ -16,7 +16,7 @@
       </div>
 
 
-      <form [formGroup]="authForm" (ngSubmit)="OnLogin(authForm)">
+      <form [formGroup]="authForm" (ngSubmit)="OnLogin(authForm.value)">
 
     
         <div class="mb-3">

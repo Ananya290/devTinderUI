@@ -36,4 +36,13 @@ export class AppComponent {
      │
      ├── app.component.ts       # standalone root component
      ├── app.rout
+     ├── store/              ⭐ (NEW – global state)
+ │     └── auth/
+ │         ├── auth.actions.ts
+ │         ├── auth.reducer.ts
+ │         ├── auth.selectors.ts
+ │         ├── auth.effects.ts
+ │         └── auth.state.ts
+     utils
+           constants
 */

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { AuthComponent } from '../auth/auth.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [AuthComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
