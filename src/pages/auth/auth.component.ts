@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { loginSuccess } from '../../store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { User } from '../../store/auth.model';
+import { Router } from '@angular/router';
 
 interface LoginResponse {
   id: string;
@@ -26,6 +27,7 @@ export class AuthComponent implements OnInit {
   authService = inject(AuthService);
   showError = false;
     private store = inject(Store);
+    private router = inject(Router);
 
   ngOnInit(): void {
     this.authForm = this.fb.group({
@@ -43,13 +45,17 @@ OnLogin(data:any){
       id: res.id,
       firstName: res.firstName,
       lastName: res.lastName,
-      emailId: data.emailId,
-      image: '',
-      token: '',
-      timestamps: ''
+      emailId: res.emailId,
+      image: res.image,
+      token: res.token,
+      timestamps: res.timestamps
     }
+        
+
   }));
     });
+    this.router.navigate(['/']);
+    this.authForm.reset();
 }
 
   }

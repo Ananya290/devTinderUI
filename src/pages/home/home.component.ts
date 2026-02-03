@@ -4,7 +4,7 @@ import { AuthComponent } from '../auth/auth.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AuthComponent],
+  imports: [],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

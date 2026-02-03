@@ -41,29 +41,35 @@
       </li>
 
       <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle d-flex align-items-center"
-          href="#"
-          role="button"
-          data-bs-toggle="dropdown"
-        >
-          <i class="fa-solid fa-user-circle fs-4 me-2"></i>          
-          <span>{{ (user$ | async)?.firstName }}</span>
-        </a>
+        <ng-container *ngIf="user$ | async as user">
+          <a
+            class="nav-link dropdown-toggle d-flex align-items-center"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+          >
+            <img *ngIf="user.image; else defaultIcon" [src]="user.image" alt="avatar" class="avatar me-2" />
+             <!-- <img src="https://wallpapers.com/images/hd/bholenath-hd-lord-shiva-in-nature-llsw6j6nm0jtl4xz.jpg" alt="user.image" class="avatar me-2" /> -->
+            <ng-template #defaultIcon>
+              <i class="fa-solid fa-user-circle fs-4 me-2"></i>
+            </ng-template>
+            <span>{{ user.firstName }}</span>
+          </a>
 
-        <ul class="dropdown-menu dropdown-menu-end">
-          <li>
-            <a class="dropdown-item" routerLink="profile">
-              <i class="fa-solid fa-user me-2"></i> Profile
-            </a>
-          </li>
-          <li><hr class="dropdown-divider" /></li>
-          <li>
-            <a class="dropdown-item text-danger" href="#">
-              <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
-            </a>
-          </li>
-        </ul>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" routerLink="profile">
+                <i class="fa-solid fa-user me-2"></i> Profile
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item text-danger" href="#">
+                <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </ng-container>
       </li>
     </ul>
   </div>

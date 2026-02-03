@@ -16,4 +16,8 @@ export class AuthService {
       password :data.password
     },{withCredentials:true} );
   }
+
+  getProfile() {
+    return this.http.get<User>(`${BASE_URL}/profile/view`, { withCredentials: true });
+  }
 }

@@ -9,3 +9,12 @@
 .dropdown-menu {
   min-width: 180px;
 }
+
+/* Avatar image for header */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+}
