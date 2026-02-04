@@ -2,10 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
-import { loginSuccess } from '../../store/auth/auth.actions';
+import { loginFailure, loginSuccess } from '../../store/auth/auth.actions';
 import { Store } from '@ngrx/store';
 import { User } from '../../store/auth.model';
 import { Router } from '@angular/router';
+import * as AuthActions from '../../store/auth/auth.actions';
+
 
 interface LoginResponse {
   id: string;
@@ -29,6 +31,9 @@ export class AuthComponent implements OnInit {
     private store = inject(Store);
     private router = inject(Router);
 
+     loading$ = this.store.select(state => state.auth.loading);
+    error$ = this.store.select(state => state.auth.error);
+
   ngOnInit(): void {
     this.authForm = this.fb.group({
       emailId:['', [  Validators.required, Validators.email,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
@@ -36,26 +41,46 @@ export class AuthComponent implements OnInit {
     })
     }
 
-OnLogin(data:any){
-    console.log(this.authForm.value);
-    this.authService.onLoginSubmit(data).subscribe((res: User) =>{
-      console.log(res);
-      this.store.dispatch(loginSuccess({
-    user: {
-      id: res.id,
-      firstName: res.firstName,
-      lastName: res.lastName,
-      emailId: res.emailId,
-      image: res.image,
-      token: res.token,
-      timestamps: res.timestamps
-    }
+// OnLogin(data:any){
+//     console.log(this.authForm.value);
+//     try{
+//  this.authService.onLoginSubmit(data).subscribe((res: User) =>{
+     
+//               this.store.dispatch(loginSuccess({
+//     user: {
+//       id: res.id,
+//       firstName: res.firstName,
+//       lastName: res.lastName,
+//       emailId: res.emailId,
+//       image: res.image,
+//       token: res.token,
+//       timestamps: res.timestamps
+//     }
         
 
-  }));
-    });
-    this.router.navigate(['/']);
-    this.authForm.reset();
-}
+//   }));
+//     this.router.navigate(['/']);
+//     this.authForm.reset();
+
+
+//     });
+//     } catch(error){
+//        this.store.dispatch(loginFailure({ error }));
+//        this.showError = true;}
+   
+  
+// }
+OnLogin() {
+    if (this.authForm.invalid) return;
+
+    this.store.dispatch(
+      AuthActions.login(
+        this.authForm.value as {
+          emailId: string;
+          password: string;
+        }
+      )
+    );
+  }
 
   }

@@ -20,4 +20,7 @@ export class AuthService {
   getProfile() {
     return this.http.get<User>(`${BASE_URL}/profile/view`, { withCredentials: true });
   }
+  logout() {
+    return this.http.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
+  }
 }

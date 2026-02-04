@@ -4,13 +4,20 @@ import { User } from '../auth.model';
 
 export interface AuthState {
   user: User | null;
+  loading: boolean;
+  error: string | null;
 }
 
 export const initialState: AuthState = {
-  user: null
+  user: null,
+  loading: false,
+  error: null
 };
 
+
 export const authReducer = createReducer( initialState,
-  on(AuthActions.loginSuccess, (state, { user }) => ({ ...state, user})),
-  on(AuthActions.logout, () => initialState)
+  on(AuthActions.login, (state) => ({ ...state, loading: true, error: null})),
+  on(AuthActions.loginSuccess, (state, { user }) => ({ ...state, user,loading: false, error: null})),
+  on(AuthActions.loginFailure, (state, { error }) => ({...state,user: null,loading: false,error})),
+  on(AuthActions.logoutSuccess, () => initialState)
 );

@@ -9,9 +9,9 @@ import { loginSuccess } from '../store/auth/auth.actions';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,HeaderComponent,FooterComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
   title = 'devTinder-WEB';
@@ -24,18 +24,16 @@ export class AppComponent implements OnInit {
       next: (user) => {
         if (user) {
           this.store.dispatch(loginSuccess({ user }));
-        }
-        else if(!user) {
+        } else if (!user) {
           this.router.navigate(['/auth']);
         }
       },
       error: () => {
         this.router.navigate(['/auth']);
-      }
+      },
     });
   }
 }
-
 
 /*
  src/

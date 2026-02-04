@@ -1,76 +1,53 @@
 <div class="login-wrapper d-flex justify-content-center align-items-center">
   <div class="card login-card border-0">
-
     <div class="card-body p-4">
 
- 
       <h4 class="text-center mb-4 text-white">
         <i class="fa-solid fa-user-lock text-danger me-2"></i>
-        Login 
+        Login
       </h4>
 
-
-      <div *ngIf="showError" class="alert alert-danger py-2">
+      <!-- NgRx API error -->
+      <div *ngIf="(error$ | async) as error" class="alert alert-danger py-2">
         <i class="fa-solid fa-circle-exclamation me-2"></i>
-        Please fix the errors before login
+        {{ error }}
       </div>
 
+      <form [formGroup]="authForm" (ngSubmit)="OnLogin()">
 
-      <form [formGroup]="authForm" (ngSubmit)="OnLogin(authForm.value)">
-
-    
+        <!-- Email -->
         <div class="mb-3">
           <label class="form-label text-white">Email</label>
-          <div class="input-group">
-            <span class="input-group-text bg-dark border-dark text-white">
-              <i class="fa-solid fa-envelope"></i>
-            </span>
-            <input
-              type="email"
-              class="form-control bg-dark text-white border-dark"
-              placeholder="Enter email"
-              formControlName="emailId">
-          </div>
-
-          <div class="text-danger small mt-1"
-            *ngIf="authForm.get('emailId')?.touched && authForm.get('emailId')?.errors">
-            <span *ngIf="authForm.get('emailId')?.errors?.['required']">
-              ⚠️ Email is required
-            </span>
-            <span *ngIf="authForm.get('emailId')?.errors?.['pattern']">
-              ⚠️ Enter a valid email address
-            </span>
-          </div>
+          <input
+            type="email"
+            class="form-control bg-dark text-white"
+            formControlName="emailId">
         </div>
 
-  
+        <!-- Password -->
         <div class="mb-4">
           <label class="form-label text-white">Password</label>
-          <div class="input-group">
-            <span class="input-group-text bg-dark border-dark text-white">
-              <i class="fa-solid fa-lock"></i>
-            </span>
-            <input
-              type="password"
-              class="form-control bg-dark text-white border-dark"
-              placeholder="Enter password"
-              formControlName="password">
-          </div>
-
-          <div class="text-danger small mt-1"
-            *ngIf="authForm.get('password')?.touched && authForm.get('password')?.invalid && authForm.get('password')?.errors?.['minlength']">
-            ⚠️ Password is required to be min 6 characters
-          </div>
-         
-          <div class="text-danger small mt-1"
-            *ngIf="authForm.get('password')?.errors?.['maxlength']">
-            ⚠️ Password cannot exceed 100 characters
-          </div>
+          <input
+            type="password"
+            class="form-control bg-dark text-white"
+            formControlName="password">
         </div>
 
+        <!-- Login Button -->
+        <button
+          type="submit"
+          class="btn btn-danger w-100 fw-semibold"
+          [disabled]="authForm.invalid || (loading$ | async)">
 
-        <button type="submit" class="btn btn-danger w-100 fw-semibold" [disabled]="this.authForm.invalid">
-          Login
+          <ng-container *ngIf="loading$ | async; else loginText">
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Logging in...
+          </ng-container>
+
+          <ng-template #loginText>
+            Login
+          </ng-template>
+
         </button>
 
       </form>
