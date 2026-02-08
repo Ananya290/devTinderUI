@@ -43,10 +43,11 @@ login$ = createEffect(() =>
 
 logout$ = createEffect(() =>
   this.actions$.pipe(
-    ofType(AuthActions.logoutSuccess),
+    ofType(AuthActions.logout),
     mergeMap(() =>
       this.authService.logout().pipe(
-        map(() => AuthActions.logoutSuccess())
+        map(() => AuthActions.logoutSuccess()),
+        tap(() => this.router.navigate(['/auth']))
       )
     )
   )
