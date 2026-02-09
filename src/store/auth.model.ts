@@ -5,5 +5,10 @@ export interface User {
   emailId: string;
   image: string;
   token: string;
-  timestamps:string
+  timestamps:string,
+  age: number;
+  gender: string;
+  skills: string;
+  about: string;
+  
 }

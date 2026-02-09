@@ -1,0 +1,93 @@
+.profile-shell {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #fff0f6 0%, #f6f9ff 45%, #ffffff 100%);
+}
+
+.cute-card {
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid #f1e6f0;
+  box-shadow: 0 12px 30px rgba(120, 99, 145, 0.12);
+}
+
+.cute-badge {
+  background: #ffe6ef;
+  color: #b84c7f;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.header-icon {
+  color: #f59fbc;
+  font-size: 20px;
+}
+
+.image-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.image-frame {
+  width: 120px;
+  height: 120px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f1f5ff;
+  border: 2px dashed #cdd6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-actions .form-control {
+  border-radius: 10px;
+  border-color: #e8e6f2;
+}
+
+.cute-input {
+  border-radius: 10px;
+  border-color: #ece8f4;
+  background: #fbfaff;
+}
+
+.cute-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(245, 159, 188, 0.2);
+  border-color: #f59fbc;
+}
+
+.cute-btn {
+  border-radius: 999px;
+  padding: 6px 16px;
+}
+
+.cute-btn-primary {
+  border-radius: 999px;
+  padding: 6px 18px;
+  background: linear-gradient(120deg, #f59fbc 0%, #9ab6ff 100%);
+  border: none;
+}
+
+.cute-btn-primary:hover {
+  filter: brightness(0.98);
+}
+
+@media (max-width: 575px) {
+  .image-row {
+    grid-template-columns: 1fr;
+  }
+
+  .image-frame {
+    width: 100%;
+    height: 160px;
+  }
+}
