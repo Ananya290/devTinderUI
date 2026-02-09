@@ -1,0 +1,46 @@
+<section class="feed-page">
+  <div class="feed-bg"></div>
+
+  <header class="feed-hero">
+    <p class="feed-eyebrow">Find your next dev match</p>
+    <h1 class="feed-title">Developer Feed</h1>
+    <p class="feed-subtitle">Swipe-inspired matching with a human touch.</p>
+  </header>
+
+  <div class="feed-loading" *ngIf="loading$ | async">Loading your feed...</div>
+
+  <div class="feed-stack" *ngIf="(feed$ | async) as feed">
+    <article class="feed-card" *ngFor="let user of feed; let i = index" [style.--i]="i">
+      <div class="card-media">
+        <img
+          class="card-avatar"
+          [src]="user?.image || 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=1200&q=80'"
+          alt="User avatar"
+        />
+        <span class="card-badge">Open to collaborate</span>
+      </div>
+
+      <div class="card-body">
+        <div class="card-header">
+          <h2 class="card-name">{{ user?.firstName || user?.name || 'Anonymous Dev' }} {{ user?.lastName || '' }}</h2>
+          <span class="card-role">{{ user?.title || 'Full Stack Builder' }}</span>
+        </div>
+
+        <p class="card-bio">
+          {{ user?.bio || 'Focused on crafting fast, delightful products with a strong backend core.' }}
+        </p>
+
+        <div class="card-tags">
+          <span class="tag">{{ user?.primarySkill || 'Angular' }}</span>
+          <span class="tag">{{ user?.secondarySkill || 'Node.js' }}</span>
+          <span class="tag">{{ user?.location || 'Remote' }}</span>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="action-btn ignore-btn" type="button">Ignore</button>
+        <button class="action-btn interest-btn" type="button">Interested</button>
+      </div>
+    </article>
+  </div>
+</section>

@@ -10,14 +10,17 @@ import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { authReducer } from '../store/auth/auth.reducer';
 import { AuthEffects } from '../store/auth/auth.effects';
+import { feedReducer } from '../store/feed/feed.reducers';
+import { FeedEffects } from '../store/feed/feed.effects';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideAnimationsAsync(),
     provideAnimations(),
     provideHttpClient(), provideStore({
-       auth: authReducer
+       auth: authReducer,
+       feed: feedReducer,
     }
-    ), provideEffects(AuthEffects), provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    ), provideEffects(AuthEffects, FeedEffects), provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
   ]
 };
