@@ -15,10 +15,25 @@ export class FeedEffects {
         ofType(FeedActions.loadFeed),
         mergeMap(() =>
         this.feedService.getFeedService().pipe(
-                map((res: any) =>  FeedActions.loadFeedSuccess({
-                  feed: Array.isArray(res?.data) ? res.data : (res?.data?.data ?? [])
-                })),
-                catchError(error => of(FeedActions.loadFeedFailure({ error })))
+                map((res: any) => {
+                  console.log('API Response:', res);
+                  let feedData = [];
+                  
+                  if (Array.isArray(res?.data)) {
+                    feedData = res.data;
+                  } else if (Array.isArray(res?.data?.data)) {
+                    feedData = res.data.data;
+                  } else if (Array.isArray(res)) {
+                    feedData = res;
+                  }
+                  
+                  console.log('Extracted Feed Data:', feedData);
+                  return FeedActions.loadFeedSuccess({ feed: feedData });
+                }),
+                catchError(error => {
+                  console.error('Feed Error:', error);
+                  return of(FeedActions.loadFeedFailure({ error }));
+                })
             )
         )
 

@@ -8,12 +8,15 @@ import { BASE_URL } from '../../utils/constant';
 export class UserfeedService {
 
 http = inject(HttpClient);
-page: number = 2;
+page: number = 1;
  limit: number = 10
 
 getFeedService(){
-  
-  return this.http.get(BASE_URL+`/user/feed?page=${this.page}&limit=${this.limit}`, {withCredentials:true});
+  console.log("feed service called");
+  return this.http.get(BASE_URL+`/user/feed?page=${this.page}&limit=${this.limit}`, {withCredentials:true },
+
+
+  );
  
 
 

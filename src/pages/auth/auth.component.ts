@@ -41,32 +41,7 @@ export class AuthComponent implements OnInit {
     })
     }
 
-// OnLogin(data:any){
-//     console.log(this.authForm.value);
-//     try{
-//  this.authService.onLoginSubmit(data).subscribe((res: User) =>{
-     
-//               this.store.dispatch(loginSuccess({
-//     user: {
-//       id: res.id,
-//       firstName: res.firstName,
-//       lastName: res.lastName,
-//       emailId: res.emailId,
-//       image: res.image,
-//       token: res.token,
-//       timestamps: res.timestamps
-//     }
-        
 
-//   }));
-//     this.router.navigate(['/']);
-//     this.authForm.reset();
-
-
-//     });
-//     } catch(error){
-//        this.store.dispatch(loginFailure({ error }));
-//        this.showError = true;}
    
   
 // }
