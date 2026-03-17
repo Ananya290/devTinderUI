@@ -1,93 +1,229 @@
-.profile-shell {
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BACKGROUND CONTAINER */
+.profile-container {
   min-height: 100vh;
-  background: radial-gradient(circle at top, #fff0f6 0%, #f6f9ff 45%, #ffffff 100%);
-}
-
-.cute-card {
-  border-radius: 20px;
-  background: #ffffff;
-  border: 1px solid #f1e6f0;
-  box-shadow: 0 12px 30px rgba(120, 99, 145, 0.12);
-}
-
-.cute-badge {
-  background: #ffe6ef;
-  color: #b84c7f;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 6px 12px;
-  border-radius: 999px;
-}
-
-.header-icon {
-  color: #f59fbc;
-  font-size: 20px;
-}
-
-.image-row {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 16px;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  padding: 20px;
+
+  /* 🔥 BEAUTIFUL GRADIENT */
+  background: linear-gradient(
+    120deg,
+    #f8cdda 0%,
+    #fbc2eb 25%,
+    #e0c3fc 55%,
+    #c2e9fb 100%
+  );
+
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.image-frame {
+/* CARD */
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: 25px;
+  border-radius: 20px;
+
+  /* 🔥 GLASS EFFECT */
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* PROFILE IMAGE */
+.profile-img img {
   width: 120px;
   height: 120px;
-  border-radius: 18px;
-  overflow: hidden;
-  background: #f1f5ff;
-  border: 2px dashed #cdd6ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.image-frame img {
-  width: 100%;
-  height: 100%;
+  border-radius: 50%;
   object-fit: cover;
+  margin-bottom: 10px;
+  border: 3px solid white;
 }
 
-.image-actions .form-control {
+/* TEXT */
+h2 {
+  margin: 10px 0;
+  font-size: 22px;
+  color: #333;
+}
+
+.tagline {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* SKILLS TAGS */
+.skills {
+  margin-bottom: 15px;
+}
+
+.skills span {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 6px 12px;
+  border-radius: 20px;
+  margin: 4px;
+  display: inline-block;
+  font-size: 12px;
+  transition: 0.2s;
+}
+
+.skills span:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* FORM */
+.form-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  outline: none;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* INPUT FOCUS */
+input:focus {
+  border-color: #ff4b2b;
+  box-shadow: 0 0 5px rgba(255, 75, 43, 0.3);
+}
+
+/* FILE UPLOAD */
+.upload-btn {
+  display: inline-block;
+  margin-bottom: 15px;
+  padding: 8px 15px;
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 10px;
-  border-color: #e8e6f2;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
 }
 
-.cute-input {
-  border-radius: 10px;
-  border-color: #ece8f4;
-  background: #fbfaff;
+.upload-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
 }
 
-.cute-input:focus {
-  box-shadow: 0 0 0 0.2rem rgba(245, 159, 188, 0.2);
-  border-color: #f59fbc;
+/* BUTTON GROUP */
+.btn-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.cute-btn {
-  border-radius: 999px;
-  padding: 6px 16px;
+.btn-group button {
+  width: 100%;
 }
 
-.cute-btn-primary {
-  border-radius: 999px;
-  padding: 6px 18px;
-  background: linear-gradient(120deg, #f59fbc 0%, #9ab6ff 100%);
+/* SAVE BUTTON */
+.save-btn {
+  padding: 12px;
   border: none;
+  border-radius: 25px;
+  background: linear-gradient(to right, #ff416c, #ff4b2b);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.cute-btn-primary:hover {
-  filter: brightness(0.98);
+.save-btn:hover {
+  transform: scale(1.05);
 }
 
-@media (max-width: 575px) {
-  .image-row {
-    grid-template-columns: 1fr;
+/* CANCEL BUTTON */
+.cancel-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  background: #e0e0e0;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancel-btn:hover {
+  background: #d6d6d6;
+  transform: scale(1.05);
+}
+
+/* EDIT BUTTON */
+.edit-btn {
+  margin-top: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background: black;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.edit-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🔥 RESPONSIVE DESIGN */
+
+/* TABLET */
+@media (max-width: 768px) {
+  .card {
+    max-width: 90%;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 500px) {
+  .form-group {
+    flex-direction: column;
   }
 
-  .image-frame {
-    width: 100%;
-    height: 160px;
+  .card {
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .profile-img img {
+    width: 100px;
+    height: 100px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .tagline {
+    font-size: 12px;
   }
 }
