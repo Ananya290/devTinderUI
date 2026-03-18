@@ -4,6 +4,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, take } from 'rxjs';
 import { selectUser } from '../../store/auth/auth.selectors';
+import { setUser } from '../../store/auth/auth.actions';
+import { UserfeedService } from '../../services/user/userfeed.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -15,6 +17,7 @@ import { selectUser } from '../../store/auth/auth.selectors';
 export class EditProfileComponent implements OnInit {
 
   private store = inject(Store);
+ private UserfeedService = inject(UserfeedService);
 
   editProfileForm = inject(FormBuilder).group({
     firstName: ['', Validators.required],
@@ -29,8 +32,13 @@ export class EditProfileComponent implements OnInit {
   userProfile: any;
 
   ngOnInit(): void {
- this.editProfileForm.disable();
-  if(this.isEditing == false){
+  console.log(this.userProfile)
+  this.editProfileForm.disable();
+  this.getUserProfile();
+ 
+  }
+  getUserProfile() {
+     if(this.isEditing == false){
      this.store.select(selectUser).subscribe(user => {
   if (!user) return;
 
@@ -45,6 +53,8 @@ export class EditProfileComponent implements OnInit {
   }
   enableEdit() {
   this.isEditing = true;
+      console.log(this.userProfile._id)
+
 
   this.editProfileForm.enable(); // form enable karo
 
@@ -62,9 +72,35 @@ export class EditProfileComponent implements OnInit {
   });
 }
   onSubmit(){
-    if (this.editProfileForm.invalid) {
-      console.log('Form is invalid');
-      return;
+    console.log(this.editProfileForm.value);
+    console.log(this.userProfile)
+    if (this.editProfileForm.valid) {
+      const formValue = this.editProfileForm.value;
+      const payload = {
+        firstName: formValue.firstName,
+        lastName: formValue.lastName,
+        age: Number(formValue.age),
+        gender: formValue.gender,
+        skills: typeof formValue.skills === 'string'
+        ? formValue.skills.split(',').map((s: string) => s.trim())
+        : formValue.skills,
+        image: formValue?.image 
+      };
+    console.log("Payload:", payload); 
+
+      this.UserfeedService.onEditProfileService(payload).subscribe({
+        next: (response) => {
+          console.log('Profile updated successfully', response);
+          // Update the store with the new user data
+          this.store.dispatch(setUser({ user: response }));
+          this.editProfileForm.reset();
+          this.isEditing = false;
+        },
+        error: (err) => {
+          console.error('Failed to update profile', err);
+        }
+      });
+
     }
   }
   cancelEdit() {
