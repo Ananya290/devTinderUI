@@ -17,9 +17,19 @@ getFeedService(){
 
 
   );
- 
 
 
+}
+onEditProfileService(data: any){
+
+  return this.http.patch(BASE_URL+`/profile/edit`, data, {
+   
+    withCredentials: true
+  });
+}
+
+getBaseUrl(): string {
+  return BASE_URL;
 }
 
 }
