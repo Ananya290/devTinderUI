@@ -7,8 +7,9 @@
     <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit()">
 
       <div class="image-upload">
-        <input type="file" id="image" hidden />
-        <label for="image" class="upload-btn">Upload Photo 📸</label>
+         <div class="profile-img">
+      <img src="{{ userProfile.image }}" alt="profile" />
+    </div>
       </div>
 
       <div class="form-group">
@@ -23,6 +24,8 @@
 
       <div class="form-group">
         <input type="text" formControlName="skills" placeholder="Skills (comma separated)" />
+         <input type="text" formControlName="image" placeholder=" Change Image URL" />
+
       </div>
 
       <button type="submit" class="save-btn">Save Changes 💾</button>

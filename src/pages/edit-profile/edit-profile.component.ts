@@ -67,7 +67,9 @@ export class EditProfileComponent implements OnInit {
       lastName: user?.lastName,
       age: user?.age?.toString(),
       gender: user?.gender,
-      skills: user?.skills
+      skills: user?.skills,
+      image: user?.image  
+      
     });
   });
 }
