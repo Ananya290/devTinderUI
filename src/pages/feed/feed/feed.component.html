@@ -39,8 +39,8 @@
       </div>
 
       <div class="card-actions">
-        <button class="action-btn ignore-btn" type="button">Ignore</button>
-        <button class="action-btn interest-btn" type="button">Interested</button>
+        <button class="action-btn ignore-btn" type="button" (click)="handleInterest('ignored', user?._id)">Ignore</button>
+        <button class="action-btn interest-btn" type="button" (click)="handleInterest('interested', user?._id)">Interested</button>
       </div>
     </article>
   </div>

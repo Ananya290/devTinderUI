@@ -9,7 +9,7 @@ export class UserfeedService {
 
 http = inject(HttpClient);
 page: number = 1;
- limit: number = 10
+ limit: number = 20
 
 getFeedService(){
   console.log("feed service called");
@@ -17,6 +17,7 @@ getFeedService(){
 
 
   );
+
 
 
 }
@@ -31,5 +32,12 @@ onEditProfileService(data: any){
 getBaseUrl(): string {
   return BASE_URL;
 }
+
+handleRequestService(status:'interested'| 'ignored',touserId:string){
+  return this.http.post(BASE_URL+`/request/send/${status}/${touserId}`, {}, {withCredentials:true});
+}
+
+
+
 
 }

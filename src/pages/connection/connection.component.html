@@ -1,0 +1,122 @@
+<section class="connections-page">
+
+  <div class="connections-bg"></div>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <header class="connections-hero text-center">
+      <p class="connections-eyebrow">Your Network</p>
+      <h1 class="connections-title">Connections</h1>
+      <p class="connections-subtitle">
+        People you've connected with on DevTinder
+      </p>
+    </header>
+
+    <!-- LOADING -->
+    <div class="connections-loading text-center" *ngIf="loading">
+      <div class="loading-spinner"></div>
+      <p>Loading your connections...</p>
+    </div>
+
+    <!-- ERROR -->
+    <div class="connections-error text-center" *ngIf="!loading && error">
+      <i class="fa-solid fa-triangle-exclamation error-icon"></i>
+      <h3>{{ error }}</h3>
+      <p>Please check your internet connection</p>
+    </div>
+
+    <!-- EMPTY -->
+    <div class="connections-empty text-center"
+      *ngIf="!loading && !error && connections.length === 0">
+
+      <i class="fa-solid fa-user-group empty-icon"></i>
+
+      <h3>No connections yet</h3>
+
+      <p>Start swiping on the feed to find developers!</p>
+    </div>
+
+    <!-- GRID -->
+    <div class="connections-grid"
+      *ngIf="!loading && !error && connections.length > 0">
+
+      <article
+        class="connection-card"
+        *ngFor="let connection of connections">
+
+        <!-- IMAGE -->
+        <div class="card-media">
+
+          <img
+            class="card-avatar"
+            [src]="connection?.image || 'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&w=1200&q=80'"
+            [alt]="connection?.firstName">
+
+          <span
+            class="card-status"
+            [class.online]="connection?.isOnline">
+          </span>
+
+        </div>
+
+        <!-- BODY -->
+        <div class="card-body">
+
+          <h2 class="card-name">
+            {{connection?.firstName || 'Anonymous'}}
+            {{connection?.lastName || 'Dev'}}
+          </h2>
+
+          <p class="card-role">
+            {{connection?.title || 'Full Stack Developer'}}
+          </p>
+
+          <p class="card-bio">
+            {{connection?.about || 'Passionate developer who loves building amazing apps.'}}
+          </p>
+
+          <div class="card-details">
+
+            <span *ngIf="connection?.age">
+              <i class="fa-solid fa-cake-candles"></i>
+              {{connection.age}}
+            </span>
+
+            <span *ngIf="connection?.gender">
+              <i class="fa-solid fa-user"></i>
+              {{connection.gender}}
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- ACTIONS -->
+        <div class="card-actions">
+
+          <button class="action-btn message-btn">
+
+            <i class="fa-solid fa-message"></i>
+
+            Message
+
+          </button>
+
+          <button class="action-btn profile-btn">
+
+            <i class="fa-solid fa-eye"></i>
+
+            View
+
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
