@@ -2,55 +2,124 @@
   <div class="card login-card border-0">
     <div class="card-body p-4">
 
+      <div class="d-flex justify-content-center gap-2 mb-3">
+        <button
+          type="button"
+          class="btn toggle-btn"
+          [class.active]="isLoginMode"
+          (click)="setMode(true)">
+          Login
+        </button>
+        <button
+          type="button"
+          class="btn toggle-btn"
+          [class.active]="!isLoginMode"
+          (click)="setMode(false)">
+          Sign Up
+        </button>
+      </div>
+
       <h4 class="text-center mb-4 text-white">
         <i class="fa-solid fa-user-lock text-danger me-2"></i>
-        Login
+        {{ isLoginMode ? 'Login' : 'Sign Up' }}
       </h4>
 
-      <!-- NgRx API error -->
       <div *ngIf="(error$ | async) as error" class="alert alert-danger py-2">
         <i class="fa-solid fa-circle-exclamation me-2"></i>
         {{ error }}
       </div>
 
-      <form [formGroup]="authForm" (ngSubmit)="OnLogin()">
+      <form *ngIf="isLoginMode; else signUpTemplate"
+            [formGroup]="authForm"
+            (ngSubmit)="OnLogin()">
 
-        <!-- Email -->
         <div class="mb-3">
           <label class="form-label text-white">Email</label>
-          <input
-            type="email"
-            class="form-control bg-dark text-white"
-            formControlName="emailId">
+          <input type="email" class="form-control bg-dark text-white" formControlName="emailId" />
+          <div *ngIf="authForm.get('emailId')?.invalid && (authForm.get('emailId')?.dirty || authForm.get('emailId')?.touched)" class="text-danger small">
+            Enter a valid email.
+          </div>
         </div>
 
-        <!-- Password -->
         <div class="mb-4">
           <label class="form-label text-white">Password</label>
-          <input
-            type="password"
-            class="form-control bg-dark text-white"
-            formControlName="password">
+          <input type="password" class="form-control bg-dark text-white" formControlName="password" />
+          <div *ngIf="authForm.get('password')?.invalid && (authForm.get('password')?.dirty || authForm.get('password')?.touched)" class="text-danger small">
+            Password must be 6-100 chars.
+          </div>
         </div>
 
-        <!-- Login Button -->
-        <button
-          type="submit"
-          class="btn btn-danger w-100 fw-semibold"
-          [disabled]="authForm.invalid || (loading$ | async)">
-
+        <button type="submit" class="btn btn-danger w-100 fw-semibold" [disabled]="authForm.invalid || (loading$ | async)">
           <ng-container *ngIf="loading$ | async; else loginText">
-            <span class="spinner-border spinner-border-sm me-2"></span>
-            Logging in...
+            <span class="spinner-border spinner-border-sm me-2"></span>Logging in...
           </ng-container>
-
-          <ng-template #loginText>
-            Login
-          </ng-template>
-
+          <ng-template #loginText>Login</ng-template>
         </button>
-
       </form>
+
+      <ng-template #signUpTemplate>
+        <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+
+          <div class="row gx-2">
+            <div class="col mb-3">
+              <label class="form-label text-white">First Name</label>
+              <input type="text" class="form-control bg-dark text-white" formControlName="firstName" />
+            </div>
+            <div class="col mb-3">
+              <label class="form-label text-white">Last Name</label>
+              <input type="text" class="form-control bg-dark text-white" formControlName="lastName" />
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-white">Email</label>
+            <input type="email" class="form-control bg-dark text-white" formControlName="emailId" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-white">Password</label>
+            <input type="password" class="form-control bg-dark text-white" formControlName="password" />
+          </div>
+
+          <div class="row gx-2">
+            <div class="col mb-3">
+              <label class="form-label text-white">Age</label>
+              <input type="number" class="form-control bg-dark text-white" formControlName="age" />
+            </div>
+            <div class="col mb-3">
+              <label class="form-label text-white">Gender</label>
+              <select class="form-select bg-dark text-white" formControlName="gender">
+                <option value="" disabled>Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-white">Profile Image URL</label>
+            <input type="text" class="form-control bg-dark text-white" formControlName="image" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-white">Skills</label>
+            <input type="text" class="form-control bg-dark text-white" formControlName="skills" />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label text-white">About</label>
+            <textarea rows="2" class="form-control bg-dark text-white" formControlName="about"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-danger w-100 fw-semibold" [disabled]="signUpForm.invalid || (loading$ | async)">
+            <ng-container *ngIf="loading$ | async; else signupText">
+              <span class="spinner-border spinner-border-sm me-2"></span>Signing up...
+            </ng-container>
+            <ng-template #signupText>Sign Up</ng-template>
+          </button>
+        </form>
+      </ng-template>
 
     </div>
   </div>

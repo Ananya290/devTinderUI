@@ -53,4 +53,16 @@ logout$ = createEffect(() =>
   )
 );
 
+signUp$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(AuthActions.signUp),
+    mergeMap(({ firstName, lastName, emailId, password, age, gender, image, skills, about }) =>
+      this.authService.onSignUpSubmit({ firstName, lastName, emailId, password, age, gender, image, skills, about }).pipe(
+        map(user => AuthActions.signUpSuccess({ user })),
+        catchError(err => of(AuthActions.signUpFailure({ error: err?.error?.message || 'Sign up failed' })))
+      )
+    )
+  )
+);
+
 }

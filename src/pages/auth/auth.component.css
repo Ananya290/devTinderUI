@@ -30,6 +30,19 @@
   border-radius: 8px;
 }
 
+.toggle-btn {
+  flex: 1;
+  border-radius: 8px;
+  border: 1px solid #dc3545;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.toggle-btn.active,
+.toggle-btn:hover {
+  background-color: #dc3545;
+  color: #fff;
+}
 
 .alert {
   font-size: 14px;

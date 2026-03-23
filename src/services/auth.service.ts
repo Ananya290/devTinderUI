@@ -16,6 +16,20 @@ export class AuthService {
       password :data.password
     },{withCredentials:true} );
   }
+  onSignUpSubmit(data:any){
+    return this.http.post<User>(`${BASE_URL}/signup`,{
+      firstName: data.firstName,
+      lastName: data.lastName,
+      emailId: data.emailId,
+      password: data.password,
+      age: data.age,
+      gender: data.gender,
+      image: data.image,
+      skills: data.skills,
+      about: data.about
+    },{withCredentials:true} );
+
+  }
 
   getProfile() {
     return this.http.get<User>(`${BASE_URL}/profile/view`, { withCredentials: true });
